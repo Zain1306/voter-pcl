@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Online Voting System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        background-color: #ff9933;
+        color: white;
+        text-align: center;
+        height: 65px;
+        padding: 5px;
+      }
+
+      main {
+        padding: 1em;
+        text-align: center;
+        background-image: url("https://www.shutterstock.com/image-vector/illustration-happy-republic-day-india-260nw-558934081.jpg");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        font-size: 25px;
+      }
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: green;
+      }
+
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 12px 130px;
+        font-size: 25px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: black;
+      }
+
+      .active {
+        background-color: #04aa6d;
+      }
+      input[type="submit"] {
+        width: 11%;
+        height: 47px;
+        border: 1px solid;
+        background: green;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #e9f4fb;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+      }
+      input[type="submit"]:hover {
+        border-color: #2691d9;
+        transition: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Online Voting System</h1>
+    </header>
+    <div>
+      <ul>
+        <li><a href="voter.html">Home</a></li>
+        <li><a href="candidate.html">Candidate</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        <li><a href="voter.html">Login</a></li>
+      </ul>
+    </div>
+    <main>
+      <h2>Welcome to Online Voting System</h2>
+      <p>This is a platform for fair and secure online voting.</p>
+      <form action="#" method="post" id="votingForm">
+        <h3>Vote for your candidate</h3>
+        <p>
+          <input
+            type="radio"
+            id="candidate1"
+            name="candidate"
+            value="candidate1"
+          />
+          <label for="candidate1">Candidate 1</label>
+        </p>
+        <p>
+          <input
+            type="radio"
+            id="candidate2"
+            name="candidate"
+            value="candidate2"
+          />
+          <label for="candidate2">Candidate 2</label>
+        </p>
+        <p>
+          <input
+            type="radio"
+            id="candidate3"
+            name="candidate"
+            value="candidate3"
+          />
+          <label for="candidate3">Candidate 3</label>
+        </p>
+        <p><input type="submit" value="SUBMIT" /></p>
+      </form>
+    </main>
+    <footer>
+      <p>&copy; 2023 Online Voting System</p>
+    </footer>
+
+    <script>
+      const votingForm = document.getElementById("votingForm");
+
+      votingForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Check if the user has already voted
+        if (hasVoted()) {
+          alert("You have already voted. You cannot vote again.");
+        } else {
+          // Get the selected candidate value
+          const selectedCandidate = document.querySelector(
+            'input[name="candidate"]:checked'
+          );
+
+          if (selectedCandidate) {
+            // Display a popup with the selected candidate
+            alert(`You voted for ${selectedCandidate.value}`);
+            // Mark the user as voted in local storage
+            markAsVoted();
+          } else {
+            // Display an alert if no candidate is selected
+            alert("Please select a candidate before submitting.");
+          }
+        }
+      });
+
+      // Function to check if the user has already voted
+      function hasVoted() {
+        const hasVotedFlag = localStorage.getItem("hasVoted");
+        return hasVotedFlag === "true";
+      }
+
+      // Function to mark the user as voted in local storage
+      function markAsVoted() {
+        localStorage.setItem("hasVoted", "true");
+      }
+    </script>
+  </body>
+</html>

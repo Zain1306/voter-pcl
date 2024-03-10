@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Online Voting Registration</title>
+    <style>
+      .center {
+        position: absolute;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        background: #ff9933;
+        border-radius: 10px;
+        box-shadow: 10px 10px 15px black;
+      }
+      .center h1 {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid black;
+      }
+      .center form {
+        padding: 0 40px;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-indian-republic-day-minimalist-yellow-background-picture-image_1280643.jpg");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        height: 100vh;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="submit"],
+      input[type="password"],
+      input[type="number"] {
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      input[type="submit"] {
+        background-color: white;
+        color: black;
+        border: none;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        border-color: red;
+        transition: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <h1>Online Voting Registration</h1>
+      <form
+        action="http://localhost:3000/users/voter/create/user"
+        method="post"
+        id="registrationForm"
+      >
+        <label for="aadharId"
+          >Aadhaar Number:(Enter an valid 12 digit number)</label
+        >
+        <input type="text" id="aadharId" name="aadharId" required />
+        <label for="name">Username:</label>
+        <input type="text" id="name" name="name" />
+        <br /><br />
+        <label for="password"
+          >Password (8-16 characters, with @ and capital letter):</label
+        >
+        <input type="password" id="password" name="password" />
+        <br /><br />
+        <label for="mobile">Mobile Number (+91 followed by 10 digits)::</label>
+        <input type="number" id="mobile" name="mobile" />
+        <br /><br />
+        <button type="submit" id="submit-button">Submit</button>
+      </form>
+    </div>
+    <script>
+      const proceedButton = document.getElementById("submit-button");
+
+      const aadharIdInput = document.getElementById("aadharId");
+      const nameInput = document.getElementById("name");
+      const passwordInput = document.getElementById("password");
+      const mobileInput = document.getElementById("mobile");
+      const rolesInput = document.getElementById("roles");
+      proceedButton.addEventListener("click", function (event) {
+        window.location.href = "voter.html";
+        // Prevent the default form submission
+        document.addEventListener("DOMContentLoaded", function () {
+          const registrationForm = document.getElementById("registrationForm");
+          if (!validateAadharId(aadharIdInput.value)) {
+            alert("Invalid Aadhar number");
+            return;
+          } else if (!validatePassword(passwordInput.value)) {
+            alert("Invalid password");
+            return;
+          } else if (!validateMobileNumber(mobileInput.value)) {
+            alert("Invalid mobile number");
+            return;
+          }
+          registrationForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(registrationForm);
+            const data = {
+              aadharId: formData.get("aadharId"),
+              name: formData.get("name"),
+              password: formData.get("password"),
+              mobile: formData.get("mobile"),
+            };
+
+            try {
+              window.location.href = "voter.html";
+              const response = await fetch(
+                "http://localhost:3000/users/voter/create/user",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                }
+              );
+
+              if (response.ok) {
+                // Handle successful submission, e.g., show a success message or redirect
+                alert("Card details submitted successfully");
+                window.location.href = "voter.html";
+              } else {
+                // Handle submission failure, e.g., display an error message
+                console.error("Submission failed");
+              }
+            } catch (error) {
+              console.error("An error occurred:", error);
+            }
+          });
+        });
+        alert("REPORT HAS BEEN SUCCESSFULLY CREATED"); // For example, display an alert
+      });
+
+      // Validation functions (as in your previous code)
+      function validateAadharId(aadharId) {
+        return /^\d{12}$/.test(aadharId);
+      }
+
+      function validatePassword(password) {
+        return /^(?=.*[@])(?=.*[A-Z]).{8,16}$/.test(password);
+      }
+
+      function validateMobileNumber(mobile) {
+        return /^\+91[0-9]{10}$/.test(mobile);
+      }
+    </script>
+  </body>
+</html>

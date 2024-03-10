@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidates for Voting</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin: 20px 0;
+      }
+
+      .candidate-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .candidate {
+        width: 200px;
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .candidate:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .candidate img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
+
+      .candidate-name {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      header {
+        background-color: #ff9933;
+        color: white;
+        text-align: center;
+        height: 65px;
+        padding: 5px;
+      }
+
+      main {
+        padding: 1em;
+        text-align: center;
+        background-image: url("https://img.freepik.com/free-vector/indian-tricolor-theme-watercolor-texture-background-vector_1055-11999.jpg");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        font-size: 25px;
+        position: relative;
+        top: 64px;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: green;
+      }
+
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 12px 130px;
+        font-size: 25px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: black;
+      }
+
+      .active {
+        background-color: #04aa6d;
+      }
+      .nav {
+        position: absolute;
+        top: 80px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Online Voting System</h1>
+    </header>
+    <div class="nav">
+      <ul>
+        <li><a href="voter1.html">Home</a></li>
+        <li><a href="candidate.html">Candidate</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        <li><a href="voter.html">Login</a></li>
+      </ul>
+    </div>
+    <main>
+      <h2>Welcome to Online Voting System</h2>
+      <p>This is a platform for fair and secure online voting.</p>
+      <h1>Candidates for Voting</h1>
+
+      <div class="candidate-container">
+        <div class="candidate">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUhB6w_5j3uHxm2U9smPq2IiSuup7athYcW31ESsLXHjRZuAv6grshXTQafNqJykItBOE&usqp=CAU"
+            alt="Candidate 1"
+          />
+          <div class="candidate-name">Candidate 1</div>
+        </div>
+
+        <div class="candidate">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Official_Photograph_of_Prime_Minister_Narendra_Modi_Portrait.png"
+            alt="Candidate 2"
+          />
+          <div class="candidate-name">Candidate 2</div>
+        </div>
+
+        <div class="candidate">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLh3uSKyixsRoyc0qvk23DbS-kYO_Pe8Jg36dhJ7UeT4oFwpKOHxIPK5m137RyGZJpJ3k&usqp=CAU"
+            alt="Candidate 3"
+          />
+          <div class="candidate-name">Candidate 3</div>
+        </div>
+
+        <!-- Add more candidate profiles as needed -->
+      </div>
+    </main>
+  </body>
+</html>

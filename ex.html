@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="center">
+      <h1>Login</h1>
+      <form
+        id="loginForm"
+        method="post"
+        action="http://localhost:3000/auth/login"
+      >
+        <div class="txt_field">
+          <input type="text" name="aadharId" required />
+          <span></span>
+          <label>AADHAR NUMBER</label>
+        </div>
+        <div class="txt_field" id="otpField" style="display: none">
+          <input type="text" name="otp" required />
+          <span></span>
+          <label>OTP</label>
+        </div>
+        <input type="submit" value="Login" class="submit-button" />
+        <div class="signup_link">
+          Not a member? <a href="voter3.html">Signup</a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const otpField = document.getElementById("otpField");
+
+      loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(loginForm);
+        const userData = {
+          aadharId: formData.get("aadharId"),
+          otp: formData.get("otp"),
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+
+            if (data.showOtp) {
+              // Show the OTP field
+              otpField.style.display = "block";
+              alert(
+                "Please enter the OTP sent to your registered mobile number."
+              );
+            } else {
+              // Redirect to the home page or another page
+              window.location.href = "voter1.html";
+            }
+          } else {
+            alert("Login failed. Please check your Aadhar ID and OTP.");
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+          alert("An error occurred. Please try again later.");
+        }
+      });
+    </script>
+  </body>
+</html>
